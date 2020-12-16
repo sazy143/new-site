@@ -10,58 +10,31 @@ import Page404 from "./pages/Page404";
 import Modal from "./components/Modal";
 
 function App() {
-  let [showLogin, setShowLogin] = useState(false);
-
   return (
     <div
       className="App"
-      style={{ backgroundColor: "darkgrey", minHeight: "100vh" }}
+      style={{ backgroundColor: "darkgrey", minHeight: "150vh" }}
     >
-      <Modal
-        text="test modal"
-        showLogin={showLogin}
-        setShowLogin={setShowLogin}
-      ></Modal>
       <Router>
         <Switch>
-          <NavRoute
-            exact
-            component={Home}
-            path="/"
-            setShowLogin={setShowLogin}
-          />
-          <NavRoute
-            exact
-            component={About}
-            path="/About"
-            setShowLogin={setShowLogin}
-          />
-          <NavRoute
-            exact
-            component={Projects}
-            path="/Projects"
-            setShowLogin={setShowLogin}
-          />
-          <NavRoute
-            exact
-            component={Blog}
-            path="/Blog"
-            setShowLogin={setShowLogin}
-          />
-          <NavRoute exact component={Page404} setShowLogin={setShowLogin} />
+          <NavRoute exact component={Home} path="/" />
+          <NavRoute exact component={About} path="/About" />
+          <NavRoute exact component={Projects} path="/Projects" />
+          <NavRoute exact component={Blog} path="/Blog" />
+          <NavRoute exact component={Page404} />
         </Switch>
       </Router>
     </div>
   );
 }
 
-const NavRoute = ({ exact, path, setShowLogin, component: Component }) => (
+const NavRoute = ({ exact, path, component: Component }) => (
   <Route
     exact={exact}
     path={path}
     render={(props) => (
       <div>
-        <Navbar setShowLogin={setShowLogin} />
+        <Navbar />
         <Component {...props} />
       </div>
     )}
