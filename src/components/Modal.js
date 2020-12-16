@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 let Modal = ({
   text,
   showModal,
@@ -5,7 +7,6 @@ let Modal = ({
   component: Component,
   height,
   width,
-  setModalComponent,
 }) => {
   let modalClick = (e) => {
     e.preventDefault();
@@ -22,6 +23,8 @@ let Modal = ({
       id="modal-root"
       onClick={() => setShowModal(false)}
       style={{
+        top: 0,
+        left: 0,
         height: "100vh",
         width: "100vw",
         position: "fixed",
@@ -48,8 +51,23 @@ let Modal = ({
           minHeight: "600px",
         }}
       >
-        <h1>{text}</h1>
-        <Component setModalComponent={setModalComponent} />
+        <h1 className="text-center">{text}</h1>
+        <Component />
+        <div
+          className="modal-footer-custom"
+          style={{
+            bottom: "0px",
+            position: "absolute",
+            width: "100%",
+          }}
+        >
+          <button
+            onClick={() => setShowModal(false)}
+            style={{ width: "100%", borderRadius: "15px", height: "3em" }}
+          >
+            Close
+          </button>
+        </div>
       </div>
     </div>
   );

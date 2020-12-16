@@ -1,38 +1,24 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Login from "./Login";
+import LoginRegister from "./LoginRegister";
 import Modal from "./Modal";
-import ReactDom from "react-dom";
 
 let Navbar = (props) => {
   let [showModal, setShowModal] = useState(false);
-  let [modalComponent, setModalComponent] = useState(<></>);
-
-  let createModal = () => {
-    let modalDiv = document.getElementById("modalRenderer");
-    if (!modalDiv) {
-      let modalDiv = document.createElement("div");
-      modalDiv.id = "modalRenderer";
-      document.body.appendChild(modalDiv);
-    }
-
-    ReactDom.render(
-      <Modal
-        text="test"
-        showModal={showModal}
-        setShowModal={setShowModal}
-        component={modalComponent}
-        setModalComponent={setModalComponent}
-      />,
-      document.getElementById("modalRenderer")
-    );
-  };
 
   return (
     <nav
       className="navbar navbar-expand-lg navbar-light fixed-top"
       id="mainNav"
     >
+      <div className="loginModal">
+        <Modal
+          text="test some really long text phrase that extends past eh outside border"
+          showModal={showModal}
+          component={LoginRegister}
+          setShowModal={setShowModal}
+        ></Modal>
+      </div>
       <div className="container">
         <Link className="navbar-brand js-scroll-trigger" to="/">
           Zachary Bentsen
@@ -82,17 +68,21 @@ let Navbar = (props) => {
               </Link>
             </li>
             <li className="px-1 nav-item">
-              <a
+              <button
                 className="nav-link js-scroll-trigger"
                 onClick={() => {
-                  createModal();
-                  setModalComponent(Login);
                   setShowModal(true);
                 }}
-                style={{ cursor: "pointer" }}
+                style={{
+                  cursor: "pointer",
+                  backgroundColor: "transparent",
+                  border: "none",
+                  padding: "0!important",
+                  outline: "none",
+                }}
               >
                 Login
-              </a>
+              </button>
             </li>
           </ul>
         </div>
